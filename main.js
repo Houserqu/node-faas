@@ -2,7 +2,8 @@ const Koa = require('koa');
 const Router = require('@koa/router');
 const bodyParser = require('koa-bodyparser');
 const {VM, VMScript} = require('vm2')
-const sequelize = require('sequelize');
+const static = require('koa-static');
+
 
 const app = new Koa();
 const router = new Router();
@@ -10,10 +11,13 @@ const router = new Router();
 // vm sandbox 第三方库
 const axios = require('axios')
 const  _ = require('lodash')
+const sequelize = require('sequelize');
 
 app.use(bodyParser({
   enableTypes: ['json', 'form', 'text']
 }));
+
+app.use(static('./web/dist'))
 
 // 校验代码合法性
 router.post('/api/check', (ctx) => {

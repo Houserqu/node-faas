@@ -26,12 +26,26 @@ query(_params.path)
   `
 }, {
   name: 'lodash',
-  params: '',
+  params: `
+{
+  "count": 10
+}
+  `,
   code: `
-async function query(path) {
+async function genUsers(count) {
+  const users = []
+  for(let i = 0; i < count; i++) {
+      users.push({
+          name: 'tom' + i,
+          age: _.random(1, 100)
+      })
+  }
+
+  // 根据年龄排序
+  return _.sortBy(users, 'age')
 }
 
-query(_params.path)
+genUsers(_params.count)
   `
 }, {
   name: 'mysql',
