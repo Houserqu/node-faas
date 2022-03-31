@@ -1,2 +1,3 @@
 # node-faas
-Faas use node vm
+
+基于 vm2 + koa 的 js 云函数服务
