@@ -17,7 +17,7 @@ main()
   name: '发起请求',
   params: `
 {
-  "path": "http://9.134.10.199:8020/api/user/login"
+  "path": "http://localhost:8030/api/ping"
 }
   `,
   code: `

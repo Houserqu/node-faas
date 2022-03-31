@@ -59,6 +59,14 @@ router.post('/api/run', async (ctx, next) => {
   }
 })
 
+// demo
+router.get('/api/ping', async (ctx, next) => {
+  ctx.body = {
+    ret: 0,
+    data: 'pong'
+  }
+})
+
 app
   .use(router.routes())
   .use(router.allowedMethods())
