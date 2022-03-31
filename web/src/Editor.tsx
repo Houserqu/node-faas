@@ -5,16 +5,16 @@ interface Props {
   defaultValue?: string
   height?: number
   onChange?: any
+  language?: string
 }
 
-export default function Editor({defaultValue, height = 500, onChange}: Props) {
+export default function Editor({defaultValue, height = 500, onChange, language}: Props) {
   const editorRef = useRef<any>(null)
 
   useEffect(() => {
     const editor = monaco.editor.create(editorRef.current, {
       value: defaultValue,
-      language: 'javascript',
-      automaticLayout: true,
+      language: language || 'javascript',
     });
 
     editor.onDidChangeModelContent((event) => {
@@ -23,6 +23,8 @@ export default function Editor({defaultValue, height = 500, onChange}: Props) {
   }, [])
 
   return (
-    <div ref={editorRef} style={{height}}></div>
+    <div style={{ border: '1px solid #bebebe' }}>
+      <div ref={editorRef} style={{height}}></div>
+    </div>
   )
 }

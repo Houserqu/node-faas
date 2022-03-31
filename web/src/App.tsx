@@ -6,7 +6,7 @@ import data from './fun'
 const { Content } = Layout;
 
 function App() {
-  const [funcList, setFuncList] = useState<{ name: string, code: string, params: any[] }[]>(data)
+  const [funcList, setFuncList] = useState<{ name: string, code: string, params: string }[]>(data)
 
   return (
     <div className="App">
@@ -16,7 +16,7 @@ function App() {
             <Content style={{ padding: '24px', minHeight: 280, backgroundColor: '#fff' }}>
               <Tabs defaultActiveKey="1" tabPosition='left' destroyInactiveTabPane={true}>
                 {funcList.map(v => (
-                  <Tabs.TabPane tab={`Tab-${v.name}`} key={v.name}>
+                  <Tabs.TabPane tab={v.name} key={v.name}>
                     <Config defaultCode={v.code} defaultParams={v.params} />
                   </Tabs.TabPane>
                 ))}
