@@ -22,7 +22,14 @@ export default function Config({ defaultCode, defaultParams = '' }: Props) {
       }
 
       Modal.success({
-        content: typeof res.data.data === 'string' ? res.data.data : JSON.stringify(res.data.data),
+        content: (
+          <Form>
+            <Form.Item label="执行耗时">{res.data.data.runTime}</Form.Item>
+            <Form.Item label="执行结果">
+              {typeof res.data.data.result === 'string' ? res.data.data.result : JSON.stringify(res.data.data.result)}
+            </Form.Item>
+          </Form>
+        ),
         title: '执行成功',
         width: 800
       })

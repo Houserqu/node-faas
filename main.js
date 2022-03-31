@@ -2,6 +2,7 @@ const Koa = require('koa');
 const Router = require('@koa/router');
 const bodyParser = require('koa-bodyparser');
 const {VM, VMScript} = require('vm2')
+const sequelize = require('sequelize');
 
 const app = new Koa();
 const router = new Router();
@@ -28,20 +29,27 @@ router.post('/api/check', (ctx) => {
 
 // 执行代码
 router.post('/api/run', async (ctx, next) => {
-  const code = ctx.request.body
-  
+  const { code, params } = ctx.request.body
+
   try {
+    let startTime = new Date()
     const vm = new VM({
       timeout: 10000, // 超时时间
       sandbox: {
         axios,
         _,
-        _params: ctx.request.query // 参数
+        sequelize,
+        _params: params ? JSON.parse(params) : {} // 参数
       }
     })
+    const result = await vm.run(code)
 
-    const res = await vm.run(code)
-    ctx.body = { ret: 0, data: res }
+    let endTime = new Date()
+
+    ctx.body = { ret: 0, data: {
+      result,
+      runTime: `${endTime.getTime() - startTime.getTime()}ms`
+    } }
   } catch (error) {
     ctx.body = { ret: 1, msg: error.message }
   }

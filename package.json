@@ -25,6 +25,8 @@
     "koa-bodyparser": "^4.3.0",
     "loadsh": "^0.0.4",
     "lodash": "^4.17.21",
+    "mysql2": "^2.3.3",
+    "sequelize": "^7.0.0-alpha2.2",
     "vm2": "^3.9.9"
   }
 }
