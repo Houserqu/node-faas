@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal } from "antd";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import * as monaco from 'monaco-editor'
+import { useState } from "react";
+import Editor from "./Editor";
 
 interface Props {
   defaultCode: string
@@ -47,22 +47,6 @@ export default function Config({ defaultCode, defaultParams = [] }: Props) {
     })
   }
 
-  useEffect(() => {
-    monaco.editor.create(document.getElementById('editor'), {
-      value: code,
-      language: 'javascript',
-      automaticLayout: true,
-      height: 500
-    });
-
-    return () => {
-      const dom = document.getElementById("editor");
-      if(dom) {
-        dom.parentNode.removeChild(dom);
-      }
-    }
-  }, [])
-
   return (
     <div>
       <Form layout="vertical">
@@ -79,7 +63,7 @@ export default function Config({ defaultCode, defaultParams = [] }: Props) {
         </Form.Item>
         <Form.Item name="code" label="代码">
           <div style={{ border: '1px solid #bebebe' }}>
-            <div id="editor" style={{height: 500}}></div>
+            <Editor defaultValue={code} onChange={setCode} />
           </div>
 
         </Form.Item>

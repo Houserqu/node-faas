@@ -14,7 +14,7 @@ function App() {
         <Content style={{ padding: '0 50px' }}>
           <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
             <Content style={{ padding: '24px', minHeight: 280, backgroundColor: '#fff' }}>
-              <Tabs defaultActiveKey="1" tabPosition='left' destroyInactiveTabPane>
+              <Tabs defaultActiveKey="1" tabPosition='left' destroyInactiveTabPane={true}>
                 {funcList.map(v => (
                   <Tabs.TabPane tab={`Tab-${v.name}`} key={v.name}>
                     <Config defaultCode={v.code} defaultParams={v.params} />
